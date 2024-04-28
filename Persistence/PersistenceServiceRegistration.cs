@@ -1,5 +1,8 @@
 ﻿using Application.Repositories;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Protocols;
 using Persistence.Contexts;
 using Persistence.Repositories;
 using System;
@@ -14,7 +17,11 @@ namespace Persistence
     {
         public static IServiceCollection AddPersistenceServices(this IServiceCollection services)
         {
-            services.AddDbContext<BenYaparimDbContext>();
+            ConfigurationManager configurationManager = new();
+            configurationManager.SetBasePath(Path.Combine(Directory.GetCurrentDirectory(), "../WebAPI"));
+            configurationManager.AddJsonFile("appsettings.json");
+
+            services.AddDbContext<BenYaparimDbContext>(options => options.UseSqlServer(configurationManager.GetConnectionString("DefaultConnection")));
             services.AddScoped<IUserRepository, EfUserRepository>();
             services.AddScoped<IUserOperationClaimRepository, EfUserOperationClaimRepository>();
             services.AddScoped<IOperationClaimRepository, EfOperationClaimRepository>();

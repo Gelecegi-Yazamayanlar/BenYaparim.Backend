@@ -18,7 +18,8 @@ namespace Persistence
         public static IServiceCollection AddPersistenceServices(this IServiceCollection services)
         {
             ConfigurationManager configurationManager = new();
-            configurationManager.SetBasePath(Path.Combine(Directory.GetCurrentDirectory(), "../WebAPI"));
+            configurationManager.SetBasePath(Path.Combine(Directory.GetCurrentDirectory()));
+            //Console.WriteLine(Directory.GetCurrentDirectory());
             configurationManager.AddJsonFile("appsettings.json");
 
             services.AddDbContext<BenYaparimDbContext>(options => options.UseSqlServer(configurationManager.GetConnectionString("DefaultConnection")));

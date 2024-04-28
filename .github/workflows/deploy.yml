@@ -30,7 +30,8 @@ jobs:
 
       - name: Publish
         run: dotnet publish --no-build --no-restore -c Release -o ${GITHUB_WORKSPACE}/publish_output
-
+      - name: konum
+        run: pwd
       - name: Check process via SSH
         uses: appleboy/ssh-action@v1.0.3
         with:
@@ -48,7 +49,7 @@ jobs:
           username: ${{ secrets.SERVER_USERNAME }}
           key: ${{ secrets.PRIVATE_KEY }}
           passphrase: ${{ secrets.PASSPHRASE }}
-          source:  /home/runner/work/BenYaparim.Backend/BenYaparim.Backend/publish_output/*
+          source:  ${GITHUB_WORKSPACE}/publish_output/*
           target: "/home/testuser/projects/"
 
 

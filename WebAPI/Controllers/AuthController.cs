@@ -29,7 +29,7 @@ namespace WebAPI.Controllers
         public async Task<IActionResult> Register(RegisterCommand registerCommand)
         {
             await _mediator.Send(registerCommand);
-            return Ok("User Created");
+            return Ok();
         }
     }
 }

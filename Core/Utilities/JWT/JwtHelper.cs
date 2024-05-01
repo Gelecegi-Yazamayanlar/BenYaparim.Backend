@@ -20,7 +20,7 @@ namespace Core.Utilities.JWT
             this.tokenOptions = tokenOptions;
         }
         // 2.10
-        public AccessToken CreateToken(BaseUser user, List<OperationClaim> operationClaims)
+        public AccessToken CreateToken(BaseUser user, List<BaseOperationClaim> operationClaims)
         {
             // Özellikleri oku ve token'i yaz.
             DateTime expirationTime = DateTime.Now.AddMinutes(tokenOptions.ExpirationTime);
@@ -44,11 +44,14 @@ namespace Core.Utilities.JWT
 
         protected IEnumerable<Claim> SetAllClaims(BaseUser user, List<string> operationClaims)
         {
+
+
+
             List<Claim> claims = new List<Claim>();
             claims.Add(new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()));
             claims.Add(new Claim(ClaimTypes.Name, user.FirstName));
             claims.Add(new Claim(ClaimTypes.Email, user.Email));
-
+            
             foreach (var operationClaim in operationClaims)
             {
                 claims.Add(new Claim(ClaimTypes.Role, operationClaim));

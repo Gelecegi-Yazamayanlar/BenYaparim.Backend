@@ -46,7 +46,7 @@ namespace Application.Features.Auth.Commands.Login
                 List<UserOperationClaim> userOperationClaims = await _userOperationClaimRepository
                     .GetListAsync(i => i.UserId == user.Id, include: i => i.Include(i => i.OperationClaim));
 
-                return _tokenHelper.CreateToken(user, userOperationClaims.Select(i => (Core.Entities.OperationClaim)i.OperationClaim).ToList());
+                return _tokenHelper.CreateToken(user, userOperationClaims.Select(i => (Core.Entities.BaseOperationClaim)i.OperationClaim).ToList());
             }
         }
 

@@ -23,6 +23,22 @@ namespace Persistence.Contexts
             
             base.OnConfiguring(optionsBuilder);
         }
-        
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+
+
+            List<OperationClaim> operationClaims = new List<OperationClaim>()
+            {
+                new OperationClaim(){Name="Buying",Id=1}, // Alıcı 
+                new OperationClaim(){Name="Seller",Id=2}, // Satıcı
+                new OperationClaim(){Name="Admin",Id=3}, //  Yönetici
+            };
+
+            modelBuilder.Entity<OperationClaim>().HasData(operationClaims);
+
+            base.OnModelCreating(modelBuilder);
+        }
+
     }
 }

@@ -1,6 +1,8 @@
 using Application;
 using Core;
+using Core.Utilities.Encryption;
 using Core.Utilities.JWT;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Persistence;
 
 
@@ -21,6 +23,24 @@ builder.Services.AddCors(options =>
 // Add services to the container.
 
 TokenOptions? tokenOptions = builder.Configuration.GetSection("TokenOptions").Get<TokenOptions>();
+
+
+builder.Services
+    .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters()
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            ValidIssuer = tokenOptions.Issuer,
+            ValidAudience = tokenOptions.Audience,
+            IssuerSigningKey = SecurityKeyHelper.CreateSecurityKey(tokenOptions.SecurityKey)
+        };
+    });
+
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
@@ -44,6 +64,9 @@ app.UseHttpsRedirection();
 
 
 app.UseCors(MyAllowSpecificOrigins);
+
+app.UseAuthentication();
+
 app.UseAuthorization();
 
 app.MapControllers();

@@ -28,9 +28,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("role/[action]")]
-        public async Task<IActionResult> GetAll([FromQuery] GetAllOperationClaimQuery command)
+        public async Task<IActionResult> GetAll()
         {
-            GetAllOperationClaimQueryResponse resp = await _mediator.Send(command);
+            GetAllOperationClaimQueryResponse resp = await _mediator.Send(new GetAllOperationClaimQuery());
             return Ok(resp);
         }
     }

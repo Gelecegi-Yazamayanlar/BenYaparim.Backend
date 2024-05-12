@@ -48,7 +48,7 @@ namespace Application.Features.Auth.Commands.Login
 
                 //return _tokenHelper.CreateToken(user, userOperationClaims.Select(i => (Core.Entities.BaseOperationClaim)i.OperationClaim).ToList());
 
-                return _tokenHelper.CreateToken(user, null);
+                return _tokenHelper.CreateToken(user);
             }
         }
 

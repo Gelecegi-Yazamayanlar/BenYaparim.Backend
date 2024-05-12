@@ -20,7 +20,7 @@ namespace Core.Utilities.JWT
             this.tokenOptions = tokenOptions;
         }
         // 2.10
-        public AccessToken CreateToken(BaseUser user, List<BaseOperationClaim> operationClaims)
+        public AccessToken CreateToken(BaseUser user)
         {
             // Özellikleri oku ve token'i yaz.
             DateTime expirationTime = DateTime.Now.AddMinutes(tokenOptions.ExpirationTime);
@@ -31,7 +31,7 @@ namespace Core.Utilities.JWT
             JwtSecurityToken jwt = new JwtSecurityToken(
                 issuer: tokenOptions.Issuer,
                 audience: tokenOptions.Audience,
-                claims: SetAllClaims(user, operationClaims.Select(i => i.Name).ToList()),
+                claims: SetAllClaims(user),
                 notBefore: DateTime.Now,
                 expires: expirationTime,
                 signingCredentials: signingCredentials
@@ -42,7 +42,7 @@ namespace Core.Utilities.JWT
             return new AccessToken() { Token = jwtToken, ExpirationTime = expirationTime };
         }
 
-        protected IEnumerable<Claim> SetAllClaims(BaseUser user, List<string> operationClaims)
+        protected IEnumerable<Claim> SetAllClaims(BaseUser user)
         {
 
 
@@ -51,13 +51,7 @@ namespace Core.Utilities.JWT
             claims.Add(new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()));
             claims.Add(new Claim(ClaimTypes.Name, user.FirstName));
             claims.Add(new Claim(ClaimTypes.Email, user.Email));
-            
-            foreach (var operationClaim in operationClaims)
-            {
-                claims.Add(new Claim(ClaimTypes.Role, operationClaim));
-            }
 
-            claims.Add(new Claim("Tobeto", "abc"));
 
             return claims;
         }

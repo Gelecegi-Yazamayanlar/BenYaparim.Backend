@@ -19,6 +19,7 @@ namespace Application.Features.Auth.Commands.Register
         public string LastName { get; set; }
 
 
+
         public class RegisterCommandHandler : IRequestHandler<RegisterCommand>
         {
 

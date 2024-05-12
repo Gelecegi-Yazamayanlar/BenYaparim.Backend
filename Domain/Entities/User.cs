@@ -10,10 +10,10 @@ namespace Domain.Entities
 {
     public class User : BaseUser
     {
-        public string PhoneNumber { get; set; }
-        public string ProfessionCategoryId { get; set; }
-        public string ProfessionTitle { get; set; }
-        public string ProfessionDescription { get; set; }
+        public string? PhoneNumber { get; set; }
+        public string? ProfessionCategoryId { get; set; }
+        public string? ProfessionTitle { get; set; }
+        public string? ProfessionDescription { get; set; }
         public bool isAdmin { get; set; } = false;
 
         public virtual List<JobListing> JobListings { get; set; }

@@ -24,8 +24,7 @@ namespace Persistence
 
             services.AddDbContext<BenYaparimDbContext>(options => options.UseSqlServer(configurationManager.GetConnectionString("DefaultConnection")));
             services.AddScoped<IUserRepository, EfUserRepository>();
-            services.AddScoped<IUserOperationClaimRepository, EfUserOperationClaimRepository>();
-            services.AddScoped<IOperationClaimRepository, EfOperationClaimRepository>();
+
 
             return services;
         }

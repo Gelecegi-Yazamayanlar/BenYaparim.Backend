@@ -14,5 +14,6 @@ namespace Domain.Entities
         public string IBAN { get; set; }
         public double TotalEarnings { get; set; }
         public virtual List<FreelancerSkill> FreelancerSkills { get; set; }
+        public virtual List<FreelancerPortfolio> FreelancerPortfolios { get; set; }
     }
 }

@@ -24,13 +24,13 @@ namespace Application.Features.Auth.Commands.Register
 
             private readonly IMapper _mapper;
             private readonly IUserRepository _userRepository;
-            private readonly IUserOperationClaimRepository _userOperationClaimRepository;
+            //private readonly IUserOperationClaimRepository _userOperationClaimRepository;
 
-            public RegisterCommandHandler(IMapper mapper, IUserRepository userRepository, IUserOperationClaimRepository userOperationClaimRepository)
+            public RegisterCommandHandler(IMapper mapper, IUserRepository userRepository/*, IUserOperationClaimRepository userOperationClaimRepository*/)
             {
                 _mapper = mapper;
                 _userRepository = userRepository;
-                _userOperationClaimRepository = userOperationClaimRepository;
+                //_userOperationClaimRepository = userOperationClaimRepository;
             }
 
             public async Task Handle(RegisterCommand request, CancellationToken cancellationToken)
@@ -46,7 +46,7 @@ namespace Application.Features.Auth.Commands.Register
                 //user.UserOperationClaims = new List<UserOperationClaim>() {
                 //    new UserOperationClaim() { OperationClaimId = 6, UserId = user.Id }
                 //};
-                await _userRepository.AddAsync(user); 
+                await _userRepository.AddAsync(user);
 
             }
         }

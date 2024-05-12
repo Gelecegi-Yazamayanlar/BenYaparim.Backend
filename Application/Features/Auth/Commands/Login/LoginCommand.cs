@@ -5,7 +5,7 @@ using Core.Utilities.JWT;
 using Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using UserOperationClaim = Domain.Entities.UserOperationClaim;
+
 
 namespace Application.Features.Auth.Commands.Login
 {
@@ -19,13 +19,13 @@ namespace Application.Features.Auth.Commands.Login
 
             private readonly IUserRepository _userRepository;
             private readonly ITokenHelper _tokenHelper;
-            private readonly IUserOperationClaimRepository _userOperationClaimRepository;
+            //private readonly IUserOperationClaimRepository _userOperationClaimRepository;
 
-            public LoginCommandHandler(IUserRepository userRepository, ITokenHelper tokenHelper, IUserOperationClaimRepository userOperationClaimRepository)
+            public LoginCommandHandler(IUserRepository userRepository, ITokenHelper tokenHelper /*IUserOperationClaimRepository userOperationClaimRepository*/)
             {
                 _userRepository = userRepository;
                 _tokenHelper = tokenHelper;
-                _userOperationClaimRepository = userOperationClaimRepository;
+                //_userOperationClaimRepository = userOperationClaimRepository;
             }
 
             public async Task<AccessToken> Handle(LoginCommand request, CancellationToken cancellationToken)
@@ -43,10 +43,12 @@ namespace Application.Features.Auth.Commands.Login
                 if (!isPasswordMatch)
                     throw new BusinessException("Giriş başarısız.");
 
-                List<UserOperationClaim> userOperationClaims = await _userOperationClaimRepository
-                    .GetListAsync(i => i.UserId == user.Id, include: i => i.Include(i => i.OperationClaim));
+                //List<UserOperationClaim> userOperationClaims = await _userOperationClaimRepository
+                //    .GetListAsync(i => i.UserId == user.Id, include: i => i.Include(i => i.OperationClaim));
 
-                return _tokenHelper.CreateToken(user, userOperationClaims.Select(i => (Core.Entities.BaseOperationClaim)i.OperationClaim).ToList());
+                //return _tokenHelper.CreateToken(user, userOperationClaims.Select(i => (Core.Entities.BaseOperationClaim)i.OperationClaim).ToList());
+
+                return _tokenHelper.CreateToken(user, null);
             }
         }
 

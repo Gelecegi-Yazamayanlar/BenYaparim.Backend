@@ -15,5 +15,9 @@ namespace Domain.Entities
         public int Budget { get; set; }
 
         public virtual User User { get; set; }
+        public virtual SubCategory SubCategory { get; set; }
+        public virtual List<Skill> Skills { get; set; }
+
+        public virtual List<JobApplication> JobApplications { get; set; }
     }
 }

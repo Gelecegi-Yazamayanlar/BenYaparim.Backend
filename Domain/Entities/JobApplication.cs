@@ -9,9 +9,19 @@ namespace Domain.Entities
 {
     public class JobApplication : Entity
     {
-        public int JobId { get; set; }
+        public int JobListingId { get; set; }
         public int FreelancerId { get; set; }
         public ApplicationStatus Status { get; set; }
+
+        public string Note { get; set; }
+
+
+        public virtual JobListing JobListing { get; set; }
+
+        public virtual Freelancer Freelancer { get; set; }
+
+        public virtual List<Review> Reviews { get; set; }
+
 
         //TODO: Burdan devam edilecek...
 

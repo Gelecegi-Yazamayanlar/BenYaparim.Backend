@@ -16,8 +16,20 @@ namespace Persistence.Contexts
         }
 
         public DbSet<User> Users { get; set; }
-        public DbSet<OperationClaim> OperationClaims { get; set; }
-        public DbSet<UserOperationClaim> UserOperationClaims { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Freelancer> Freelancers { get; set; }
+        public DbSet<FreelancerPortfolio> FreelancerPortfolios { get; set; }
+        public DbSet<FreelancerSkill> FreelancerSkills { get; set; }
+        public DbSet<JobApplication> JobApplications { get; set; }
+        public DbSet<JobListing> JobListings { get; set; }
+        public DbSet<PortfolioImage> PortfolioImages { get; set; }
+        public DbSet<Review> Reviews { get; set; }
+        public DbSet<Skill> Skills { get; set; }
+        public DbSet<SubCategory> SubCategories { get; set; }
+
+
+        //public DbSet<OperationClaim> OperationClaims { get; set; }
+        //public DbSet<UserOperationClaim> UserOperationClaims { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -29,14 +41,14 @@ namespace Persistence.Contexts
         {
 
 
-            List<OperationClaim> operationClaims = new List<OperationClaim>()
-            {
-                new OperationClaim(){Name="Buying",Id=1}, // Alıcı 
-                new OperationClaim(){Name="Seller",Id=2}, // Satıcı
-                new OperationClaim(){Name="Admin",Id=3}, //  Yönetici
-            };
+            //List<OperationClaim> operationClaims = new List<OperationClaim>()
+            //{
+            //    new OperationClaim(){Name="Buying",Id=1}, // Alıcı 
+            //    new OperationClaim(){Name="Seller",Id=2}, // Satıcı
+            //    new OperationClaim(){Name="Admin",Id=3}, //  Yönetici
+            //};
 
-            modelBuilder.Entity<OperationClaim>().HasData(operationClaims);
+            //modelBuilder.Entity<OperationClaim>().HasData(operationClaims);
 
             base.OnModelCreating(modelBuilder);
         }
